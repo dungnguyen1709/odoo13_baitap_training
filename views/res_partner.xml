@@ -12,6 +12,10 @@
             <xpath expr="//field[@name='vat']" position="after">
                 <field name="owe_calculation"/>
             </xpath>
+
+            <xpath expr="//page[@name='internal_notes]" position="after">
+                <field name="debts"/>
+            </xpath>
         </field>
     </record>
 </odoo>
