@@ -8,6 +8,10 @@
             <xpath expr="//field[@name='vat']" position="after">
                 <field name="owe_limit"/>
             </xpath>
+
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="owe_calculation"/>
+            </xpath>
         </field>
     </record>
 </odoo>
