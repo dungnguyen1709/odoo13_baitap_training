@@ -11,7 +11,7 @@ class ResPartner(models.Model):
         selection=[('discount', 'Discount'), ('no discount', 'No Discount'), ('send by email', 'Send By Email')],
         string='Type', default='discount')
 
-    # debts = fields.One2many(string='Debts', 'account.model', 'account_id')
+    debts = fields.One2many(string='Debts')
 
 
 class AccountMove(models.Model):
