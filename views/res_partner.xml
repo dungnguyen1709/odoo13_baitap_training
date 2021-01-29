@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position="after">
                 <field name="owe_limit"/>
+                <field name="is_receive_email"/>
             </xpath>
 
             <xpath expr="//field[@name='vat']" position="after">
@@ -14,7 +15,7 @@
             </xpath>
 
             <xpath expr="//page[@name='internal_notes']" position="after">
-                <page string="Invoice ...">
+                <page string="Debts">
                     <field name="invoice_ids">
 
                     </field>
