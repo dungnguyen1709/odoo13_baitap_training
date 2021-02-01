@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    owe_limit = fields.Integer(string='Owe Limit', related='partner_id.owe_limit')
+    owe_limit = fields.Float(string='Owe Limit', related='partner_id.owe_limit')
     remaining_debt = fields.Float(string='Remaining Debt', readonly=True)
 
     @api.onchange('partner_id')
@@ -25,6 +25,7 @@ class SaleOrder(models.Model):
                 print(rec.partner_id.get_remaining_debt())
                 return {
                     'name': _('Sale'),
+                    'domain': [('partner_id', '=', self.id)],
                     'view_type': 'form',
                     'res_model': 'sale.order',
                     'view_id': False,

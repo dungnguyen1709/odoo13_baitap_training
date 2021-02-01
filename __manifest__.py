@@ -27,6 +27,7 @@
         # 'security/ir.model.access.csv',
         'views/res_partner.xml',
         'views/sale_order.xml',
+        'wizards/create_notification.xml',
         # 'views/views.xml',
         # 'views/templates.xml',
     ],
