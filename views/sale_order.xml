@@ -5,9 +5,14 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
+<!--            <xpath expr="//button[@name='action_confirm']" position="after">-->
+<!--                <button name="test_name" string="test_name_return" type="object"-->
+<!--                            class="oe_highlight"/>-->
+<!--            </xpath>-->
+
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
                 <field name="owe_limit"/>
-                <field name="remaining_debt"/>
+                <field name="remaining_debt" attrs="{'invisible': [('remaining_debt','=', 0)]}"/>
             </xpath>
         </field>
     </record>

@@ -5,30 +5,15 @@ class CreateNotification(models.TransientModel):
     _name = 'notification.wizards'
     _description = 'Wizards: Notification Friendly'
 
-    amount_owed = fields.Many2one('res.partner', string='Amount Owed')
-    contend = fields.Text(string='Contend')
+    amount_owed = fields.Many2one('sale.order', string='Amount Owed')
+    partner_id = fields.Many2one('res.partner', string='Partner', related='amount_owed.partner_id')
+    content = fields.Text(string='Content')
+    is_email_receive = fields.Boolean('Receive Email', related='partner_id.is_receive_email')
 
-    def print_report(self):
-        data = {
-            'model': 'create.notification',
-            'form': self.read()[0]
+    def send_email(self):
+        if self.is_email_receive:
+            print('123')
+
+        return {
+            'type': 'ir.actions.act_window_close'
         }
-        return self.env.ref('cm_credit_limit.report_notification').with_context(landscape=True).report_action(self,
-                                                                                                              data=data)
-
-    def delete_notification(self):
-        for rec in self:
-            rec.amount_owed.unlink()
-
-    def create_notification(self):
-        vals = {
-            'amount_owed': self.amount_owed.id,
-            'contend': self.contend,
-            'notes': 'Created Form The Wizards/Code'
-        }
-
-        self.amount_owed.message_post(body='Test String', subject='Notification Creation')
-        new_notification = self.env['res.partner'].create(vals)
-        context = dict(self.env.context)
-        import logging
-        _logger = logging.getLogger(__name__)

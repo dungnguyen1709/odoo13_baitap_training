@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <odoo>
+    <record id="create_notification_form" model="ir.ui.view">
+        <field name="name">create.notification.wizard</field>
+        <field name="model">notification.wizards</field>
+        <field name="arch" type="xml">
+            <form string="Create Notification">
+                <group>
+                    <field name="amount_owed" readonly="1"/>
+                    <field name="partner_id" readonly="1"/>
+                    <field name="content"/>
+                    <field name="is_email_receive" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="send_email" string="OK" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
+    <record id="create_notification_wizard" model="ir.actions.act_window">
+        <field name="name">Create Notification</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">notification.wizards</field>
+        <field name="view_mode">form</field>
+<!--        <field name="view_id" ref="create_notification_form"/>-->
+        <field name="target">new</field>
+    </record>
 
 </odoo>

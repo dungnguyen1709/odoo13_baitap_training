@@ -16,6 +16,8 @@ class SaleOrder(models.Model):
 
     def action_confirm(self):
         for rec in self:
+            super(SaleOrder, rec).action_confirm()
+
             cart_total = 0
             for product in rec.order_line:
                 cart_total += product.price_subtotal
@@ -23,18 +25,33 @@ class SaleOrder(models.Model):
             if cart_total > rec.partner_id.get_remaining_debt():
                 print(cart_total)
                 print(rec.partner_id.get_remaining_debt())
+                content = 'dit me may'
                 return {
-                    'name': _('Sale'),
-                    'domain': [('partner_id', '=', self.id)],
-                    'view_type': 'form',
-                    'res_model': 'sale.order',
-                    'view_id': False,
-                    'view_mode': 'tree,form',
+                    'name': _('Thong bao'),
+                    'res_model': 'notification.wizards',
+                    'view_mode': 'form',
                     'type': 'ir.actions.act_window',
-                    'type': 'ir.actions.act_window',
+                    'target': 'new',
+                    'context': {
+                        'default_amount_owed': self.id,
+                        'default_content': content,
+                    }
                 }
-            else:
-                super(SaleOrder, self).action_confirm()
+
+
+    def test_name(self):
+        view_id = self.env.ref('cm_credit_limit.create_notification_wizard').id
+        print(view_id)
+        return {
+            'name': _('Thong bao'),
+            'res_model': 'notification.wizards',
+            'view_mode': 'form',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {
+                'default_amount_owed': self.id
+            }
+        }
 
     # @api.onchange('order_line')
     # def check_can_buy(self):
