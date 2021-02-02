@@ -14,6 +14,8 @@
                         <br /><br />
                         Has exceeded the limit amount: ${object.partner_id.get_remaining_debt() - object.amount_total}
                         <br /><br />
+                        Please change your loan limit or change products
+                        <br /><br />
                     </p>
                 </div>
             </field>
