@@ -28,6 +28,7 @@
         'views/res_partner.xml',
         'views/sale_order.xml',
         'wizards/create_notification.xml',
+        'data/mail_template.xml',
         # 'views/views.xml',
         # 'views/templates.xml',
     ],

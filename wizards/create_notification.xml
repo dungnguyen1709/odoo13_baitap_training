@@ -13,7 +13,7 @@
                     <field name="is_email_receive" invisible="1"/>
                 </group>
                 <footer>
-                    <button name="send_email" string="OK" type="object" class="btn-primary"/>
+                    <button name="action_send_email" string="OK" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

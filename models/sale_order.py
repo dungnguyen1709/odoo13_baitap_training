@@ -18,40 +18,38 @@ class SaleOrder(models.Model):
         for rec in self:
             super(SaleOrder, rec).action_confirm()
 
-            cart_total = 0
-            for product in rec.order_line:
-                cart_total += product.price_subtotal
+            remaining_debt = rec.partner_id.get_remaining_debt()
 
-            if cart_total > rec.partner_id.get_remaining_debt():
-                print(cart_total)
+            if rec.amount_total > remaining_debt:
+                print(rec.amount_total)
                 print(rec.partner_id.get_remaining_debt())
-                content = 'dit me may'
+
+                content = f'Has exceeded the limit amount:  {remaining_debt - rec.amount_total}',
                 return {
-                    'name': _('Thong bao'),
+                    'name': _('Notification'),
                     'res_model': 'notification.wizards',
                     'view_mode': 'form',
                     'type': 'ir.actions.act_window',
                     'target': 'new',
                     'context': {
                         'default_amount_owed': self.id,
-                        'default_content': content,
+                        'default_content': content[0],
                     }
                 }
 
-
-    def test_name(self):
-        view_id = self.env.ref('cm_credit_limit.create_notification_wizard').id
-        print(view_id)
-        return {
-            'name': _('Thong bao'),
-            'res_model': 'notification.wizards',
-            'view_mode': 'form',
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'context': {
-                'default_amount_owed': self.id
-            }
-        }
+    # def test_name(self):
+    #     view_id = self.env.ref('cm_credit_limit.create_notification_wizard').id
+    #     print(view_id)
+    #     return {
+    #         'name': _('Notification'),
+    #         'res_model': 'notification.wizards',
+    #         'view_mode': 'form',
+    #         'type': 'ir.actions.act_window',
+    #         'target': 'new',
+    #         'context': {
+    #             'default_amount_owed': self.id
+    #         }
+    #     }
 
     # @api.onchange('order_line')
     # def check_can_buy(self):
