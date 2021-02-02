@@ -25,7 +25,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">notification.wizards</field>
         <field name="view_mode">form</field>
-<!--        <field name="view_id" ref="create_notification_form"/>-->
+        <field name="view_id" ref="create_notification_form"/>
         <field name="target">new</field>
     </record>
 
