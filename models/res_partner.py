@@ -10,7 +10,7 @@ class ResPartner(models.Model):
         selection=[('discount', 'Discount'), ('no discount', 'No Discount'), ('send by email', 'Send By Email')],
         string='Type', default='discount')
 
-    is_receive_email = fields.Boolean(string="Receive Email?", default=False)
+    is_receive_email = fields.Boolean(string="Receive Email", default=False)
 
     def get_remaining_debt(self):
         debt_amount = 0
